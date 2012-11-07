@@ -47,16 +47,8 @@ class BNS_Bio {
     /** Constructor */
     function __construct(){
 
-        /** Get the plugin data */
-        require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-        $bns_bio_data = get_plugin_data( __FILE__ );
-
-        /** Enqueue Styles */
-        wp_enqueue_style( 'BNS-Bio-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-style.css', array(), $bns_bio_data['Version'], 'screen' );
-        /** Check if custom stylesheet is readable (exists) */
-        if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-custom-style.css' ) ) {
-            wp_enqueue_style( 'BNS-Bio-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-custom-style.css', array(), $bns_bio_data['Version'], 'screen' );
-        }
+        /** Add Scripts and Styles */
+        add_action( 'wp_enqueue_scripts', array( $this, 'Scripts_and_Styles' ) );
 
         /** Create Shortcode */
         add_shortcode( 'bns_bio', array( $this, 'author_block' ) );
@@ -82,12 +74,12 @@ class BNS_Bio {
      * @uses    wp_enqueue_style
      */
     function Scripts_and_Styles() {
-        /** @var $bns_bio_data - holds plugin data */
+
+        /** Get the plugin data */
         require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         $bns_bio_data = get_plugin_data( __FILE__ );
 
-        /* Enqueue Scripts */
-        /* Enqueue Styles */
+        /** Enqueue Styles */
         wp_enqueue_style( 'BNS-Bio-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-style.css', array(), $bns_bio_data['Version'], 'screen' );
         /** Check if custom stylesheet is readable (exists) */
         if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-custom-style.css' ) ) {
