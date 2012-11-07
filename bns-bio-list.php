@@ -2,7 +2,7 @@
 /*
 Plugin Name: BNS Bio List
 Plugin URI: http://buynowshop.com/plugins/bns-bio/
-Description:
+Description: An extension plugin for BNS Bio that outputs the layout in a list
 Version: 0.1
 Text Domain: bns-bio
 Author: Edward Caissie
