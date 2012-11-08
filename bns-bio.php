@@ -109,20 +109,31 @@ class BNS_Bio {
         do_action( 'bns_bio_before_all' );
 
         do_action( 'bns_bio_before_author_name' );
-        echo apply_filters( 'bns_bio_author_name_text', __( 'Written by ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_name', $author_name . '<br />' );
+        echo apply_filters( 'bns_bio_author_name_text',
+            sprintf( '<span class="bns-bio-author-name-text">%1$s</span>', __( 'Written by ', 'bns-bio' ) )
+                . sprintf( '<span class="bns-bio-author-name">%1$s</span>', apply_filters( 'bns_bio_author_name', $author_name . '<br />' ) )
+        );
         do_action( 'bns_bio_after_author_name' );
 
         do_action( 'bns_bio_before_author_url' );
-        echo apply_filters( 'bns_bio_author_url_text', __( 'From: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_url', $author_url . '<br />' );
+        echo apply_filters( 'bns_bio_author_url_text',
+            sprintf( '<span class="bns-bio-author-url-text">%1$s</span>', __( 'From: ', 'bns-bio' ) )
+                . sprintf( '<span class="bns-bio-author-url">%1$s</span>', apply_filters( 'bns_bio_author_url', $author_url . '<br />' ) )
+        );
         do_action( 'bns_bio_after_author_url' );
 
         do_action( 'bns_bio_before_author_email' );
-        echo apply_filters( 'bns_bio_author_name_email_text', __( 'Email: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_email', $author_email . '<br />' );
+        echo apply_filters( 'bns_bio_author_email_text',
+            sprintf( '<span class="bns-bio-author-email-text">%1$s</span>', __( 'Email: ', 'bns-bio' ) )
+                . sprintf( '<span class="bns-bio-author-email">%1$s</span>', apply_filters( 'bns_bio_author_email', $author_email . '<br />' ) )
+        );
         do_action( 'bns_bio_after_author_email' );
 
-        do_action( 'bns_bio_before_author_bio' );
-        echo apply_filters( 'bns_bio_author_bio_text', __( 'About: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_bio', $author_bio );
-        do_action( 'bns_bio_after_author_bio' );
+        do_action( 'bns_bio_before_author_desc' );
+        echo apply_filters( 'bns_bio_author_desc_text',
+            sprintf( '<span class="bns-bio-author-desc-text">%1$s</span>', __( 'About: ', 'bns-bio' ) )
+                . sprintf( '<span class="bns-bio-author-desc">%1$s</span>', apply_filters( 'bns_bio_author_desc', $author_bio ) ) );
+        do_action( 'bns_bio_after_author_desc' );
 
         do_action( 'bns_bio_after_all' );
 

@@ -58,7 +58,7 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
     add_action( 'bns_bio_before_author_name',   function(){ echo '<li class="bns-bio-list-item">'; } );
     add_action( 'bns_bio_before_author_url',    function(){ echo '<li class="bns-bio-list-item">'; } );
     add_action( 'bns_bio_before_author_email',  function(){ echo '<li class="bns-bio-list-item">'; } );
-    add_action( 'bns_bio_before_author_bio',    function(){ echo '<li class="bns-bio-list-item">'; } );
+    add_action( 'bns_bio_before_author_desc',    function(){ echo '<li class="bns-bio-list-item">'; } );
 
     /** Hide the email address */
     // add_filter( 'bns_bio_author_name_email_text', '__return_null' );
