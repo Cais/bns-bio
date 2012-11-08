@@ -87,4 +87,8 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
     /** Add CSS container around layout */
     add_action( 'bns_bio_before_all', 'bns_bio_open_box' );
     add_action( 'bns_bio_after_all', 'bns_bio_close_box' );
+} else {
+    /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
+    $exit_message = __( 'BNS Bio Box requires the BNS Bio Plugin to be activated first.', 'bns-bio-box' );
+    exit ( $exit_message );
 }

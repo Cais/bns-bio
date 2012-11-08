@@ -106,6 +106,8 @@ class BNS_Bio {
         /** Start output buffer */
         ob_start();
 
+        echo '<div class="bns-bio">';
+
         do_action( 'bns_bio_before_all' );
 
         do_action( 'bns_bio_before_author_name' );
@@ -136,6 +138,8 @@ class BNS_Bio {
         do_action( 'bns_bio_after_author_desc' );
 
         do_action( 'bns_bio_after_all' );
+
+        echo '</div><!-- .bns-bio -->';
 
         /** @var $output - save output and close buffer */
         $output = ob_get_clean();

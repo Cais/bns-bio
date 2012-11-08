@@ -4,7 +4,7 @@ Plugin Name: BNS Bio List
 Plugin URI: http://buynowshop.com/plugins/bns-bio/
 Description: An extension plugin included with BNS Bio to output the layout in an unordered list
 Version: 0.1
-Text Domain: bns-bio
+Text Domain: bns-bio-list
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
 License: GNU General Public License v2
@@ -12,7 +12,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
 /**
- * BNS Bio
+ * BNS Bio List
+ * An extension plugin included with BNS Bio to output the layout in an
+ * unordered list.
  *
  * @package     BNS_Bio
  * @subpackage  BNS_Bio_List
@@ -66,6 +68,6 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
-    $exit_message = __( 'BNS Bio List requires the BNS Bio Plugin to be activated first.', 'bns-bio' );
+    $exit_message = __( 'BNS Bio List requires the BNS Bio Plugin to be activated first.', 'bns-bio-list' );
     exit ( $exit_message );
 }
