@@ -20,3 +20,12 @@
   The license for this software can also likely be found here:
   http://www.gnu.org/licenses/gpl-2.0.html
 */
+
+div.bns-bio-box {
+    border: 1px solid #000000;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    list-style-position: inside;
+    padding: 10px;
+}

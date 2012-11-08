@@ -2,7 +2,7 @@
 /*
 Plugin Name: BNS Bio List
 Plugin URI: http://buynowshop.com/plugins/bns-bio/
-Description: An extension plugin for BNS Bio that outputs the layout in a list
+Description: An extension plugin included with BNS Bio to output the layout in an unordered list
 Version: 0.1
 Text Domain: bns-bio
 Author: Edward Caissie
@@ -47,18 +47,22 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
-
-    /** Get global variable for BNS Bio class */
-    global $bns_bio;
-    /** Add additional actions to change the layout */
+    /**
+     * Add additional actions to change the layout
+     * Set priority higher than default (read: action fires later than default)
+     */
     add_action( 'bns_bio_before_all', function(){ echo '<ul class="bns-bio-list">'; }, 20 );
     add_action( 'bns_bio_after_all', function(){ echo '</ul><!-- .bns-bio-list -->'; }, 20 );
 
     /** No closing 'li' tag is required under CSS3 - let's take advantage of that */
-    add_action( 'bns_bio_before_author_name',   function(){ echo '<li class="bns-bio-list-item">'; }, 20 );
-    add_action( 'bns_bio_before_author_url',    function(){ echo '<li class="bns-bio-list-item">'; }, 20 );
-    add_action( 'bns_bio_before_author_email',  function(){ echo '<li class="bns-bio-list-item">'; }, 20 );
-    add_action( 'bns_bio_before_author_bio',    function(){ echo '<li class="bns-bio-list-item">'; }, 20 );
+    add_action( 'bns_bio_before_author_name',   function(){ echo '<li class="bns-bio-list-item">'; } );
+    add_action( 'bns_bio_before_author_url',    function(){ echo '<li class="bns-bio-list-item">'; } );
+    add_action( 'bns_bio_before_author_email',  function(){ echo '<li class="bns-bio-list-item">'; } );
+    add_action( 'bns_bio_before_author_bio',    function(){ echo '<li class="bns-bio-list-item">'; } );
+
+    /** Hide the email address */
+    // add_filter( 'bns_bio_author_name_email_text', '__return_null' );
+    // add_filter( 'bns_bio_author_email', '__return_null' );
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */

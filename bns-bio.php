@@ -2,7 +2,7 @@
 /*
 Plugin Name: BNS Bio
 Plugin URI: http://buynowshop.com/plugins/bns-bio/
-Description:
+Description: An author details shortcode producing plugin with extensions
 Version: 0.1
 Text Domain: bns-bio
 Author: Edward Caissie
@@ -13,6 +13,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 /**
  * BNS Bio
+ * An author details shortcode producing plugin with extensions
  *
  * @package     BNS_Bio
  * @link        http://buynowshop.com/plugins/bns-bio/
@@ -46,20 +47,11 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 class BNS_Bio {
     /** Constructor */
     function __construct(){
-
         /** Add Scripts and Styles */
         add_action( 'wp_enqueue_scripts', array( $this, 'Scripts_and_Styles' ) );
 
         /** Create Shortcode */
         add_shortcode( 'bns_bio', array( $this, 'author_block' ) );
-
-        /** Add layout formatting */
-        add_action( 'bns_bio_before_all',           array( $this, 'bns_bio_open_box' ) );
-        add_action( 'bns_bio_after_author_name',    array( $this, 'bns_bio_line_break' ) );
-        add_action( 'bns_bio_after_author_url',     array( $this, 'bns_bio_line_break' ) );
-        add_action( 'bns_bio_after_author_email',   array( $this, 'bns_bio_line_break' ) );
-        add_action( 'bns_bio_after_all',            array( $this, 'bns_bio_close_box' ) );
-
     }
 
     /**
@@ -74,7 +66,6 @@ class BNS_Bio {
      * @uses    wp_enqueue_style
      */
     function Scripts_and_Styles() {
-
         /** Get the plugin data */
         require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         $bns_bio_data = get_plugin_data( __FILE__ );
@@ -118,15 +109,15 @@ class BNS_Bio {
         do_action( 'bns_bio_before_all' );
 
         do_action( 'bns_bio_before_author_name' );
-        echo apply_filters( 'bns_bio_author_name_text', __( 'Written by ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_name', $author_name );
+        echo apply_filters( 'bns_bio_author_name_text', __( 'Written by ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_name', $author_name . '<br />' );
         do_action( 'bns_bio_after_author_name' );
 
         do_action( 'bns_bio_before_author_url' );
-        echo apply_filters( 'bns_bio_author_url_text', __( 'From: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_url', $author_url );
+        echo apply_filters( 'bns_bio_author_url_text', __( 'From: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_url', $author_url . '<br />' );
         do_action( 'bns_bio_after_author_url' );
 
         do_action( 'bns_bio_before_author_email' );
-        echo apply_filters( 'bns_bio_author_name_email_text', __( 'Email: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_email', $author_email );
+        echo apply_filters( 'bns_bio_author_name_email_text', __( 'Email: ', 'bns-bio' ) ) . apply_filters( 'bns_bio_author_email', $author_email . '<br />' );
         do_action( 'bns_bio_after_author_email' );
 
         do_action( 'bns_bio_before_author_bio' );
@@ -139,23 +130,6 @@ class BNS_Bio {
         $output = ob_get_clean();
 
         return $output;
-
     }
-
-    /** Output a line break */
-    function bns_bio_line_break(){
-        echo '<br />';
-    }
-
-    /** Open CSS wrapper container */
-    function bns_bio_open_box() {
-        echo '<div class="bns-bio-box">';
-    }
-
-    /** Close CSS wrapper container */
-    function bns_bio_close_box(){
-        echo '</div><!-- .bns-bio-box -->';
-    }
-
 }
 $bns_bio = new BNS_Bio();
