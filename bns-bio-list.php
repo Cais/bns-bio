@@ -56,11 +56,15 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
     add_action( 'bns_bio_before_all', function(){ echo '<ul class="bns-bio-list">'; }, 20 );
     add_action( 'bns_bio_after_all', function(){ echo '</ul><!-- .bns-bio-list -->'; }, 20 );
 
+    function bns_bio_list_item(){
+        echo '<li class="bns-bio-list-item">';
+    }
+
     /** No closing 'li' tag is required under CSS3 - let's take advantage of that */
-    add_action( 'bns_bio_before_author_name',   function(){ echo '<li class="bns-bio-list-item">'; } );
-    add_action( 'bns_bio_before_author_url',    function(){ echo '<li class="bns-bio-list-item">'; } );
-    add_action( 'bns_bio_before_author_email',  function(){ echo '<li class="bns-bio-list-item">'; } );
-    add_action( 'bns_bio_before_author_desc',    function(){ echo '<li class="bns-bio-list-item">'; } );
+    add_action( 'bns_bio_before_author_name', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_url', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_desc', 'bns_bio_list_item' );
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
