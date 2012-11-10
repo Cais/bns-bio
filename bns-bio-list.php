@@ -62,10 +62,6 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
     add_action( 'bns_bio_before_author_email',  function(){ echo '<li class="bns-bio-list-item">'; } );
     add_action( 'bns_bio_before_author_desc',    function(){ echo '<li class="bns-bio-list-item">'; } );
 
-    /** Hide the email address */
-    // add_filter( 'bns_bio_author_name_email_text', '__return_null' );
-    // add_filter( 'bns_bio_author_email', '__return_null' );
-
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
     $exit_message = __( 'BNS Bio List requires the BNS Bio Plugin to be activated first.', 'bns-bio-list' );
