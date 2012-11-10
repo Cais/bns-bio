@@ -5,17 +5,21 @@ Tags: author, plugin-only
 Requires at least: 3.0
 Tested up to: 3.5
 Stable tag: 0.1
+License: GNU General Public License v2
+License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Adds a shortcode outputting the post author's details.
+An author details shortcode plugin with extensions that modify output
 
 == Description ==
-Adds a shortcode outputting the post author's details.
+An author details shortcode plugin with extensions that modify output. The extensions can add a rounded corner box; display as an unordered list; and/or hide the author email address. Additionally you will find many hooks to tinker with as well.
 
 == Installation ==
 Read this article for further assistance: http://wpfirstaid.com/2009/12/plugin-installation/
 
 == Frequently Asked Questions ==
-There are no questions at this time ...
+
+= What is the shortcode? =
+The shortcode is simply `bns_bio` wrapped in the standard square brackets.
 
 == Screenshots ==
 * TBA

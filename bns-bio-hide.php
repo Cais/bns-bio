@@ -74,8 +74,8 @@ add_action( 'wp_enqueue_scripts', 'BNS_Bio_Hide_Scripts_and_Styles' );
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
 
-    add_filter( 'bns_bio_author_email_text', '__return_null' );
-    add_filter( 'bns_bio_author_email', '__return_null' );
+    add_filter( 'bns_bio_author_email_text', '__return_null', 100 );
+    add_filter( 'bns_bio_author_email', '__return_null', 100 );
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
