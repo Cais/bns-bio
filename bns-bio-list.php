@@ -54,7 +54,6 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
      * Set priority higher than default (read: action fires later than default)
      */
     add_action( 'bns_bio_before_all', function(){ echo '<ul class="bns-bio-list">'; }, 20 );
-    add_action( 'bns_bio_after_all', function(){ echo '</ul><!-- .bns-bio-list -->'; }, 20 );
 
     function bns_bio_list_item(){
         echo '<li class="bns-bio-list-item">';
@@ -62,8 +61,8 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
 
     /**
      * Change author details to use `li` tag rather than `span`
-     * @internal NOTE: CSS3 automatically closes the `li` tag before starting
-     * a new instance ... make use of this here
+     * @internal NOTE: HTML5 automatically closes the `li` tag before starting
+     * a new one ... make use of this here
      */
     add_filter( 'bns_bio_author_name_text',     function() { return sprintf( '<li class="bns-bio-author-name-text">%1$s',  __( 'Written by: ', 'bns-bio' ) ); } );
     add_filter( 'bns_bio_author_url_text',      function() { return sprintf( '<li class="bns-bio-author-url-text">%1$s',   __( 'From: ', 'bns-bio' ) ); } );
