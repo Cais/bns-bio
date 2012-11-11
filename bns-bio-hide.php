@@ -74,6 +74,11 @@ add_action( 'wp_enqueue_scripts', 'BNS_Bio_Hide_Scripts_and_Styles' );
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
 
+    function bns_bio_remove_list_item(){
+        remove_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
+    }
+    add_action( 'init', 'bns_bio_remove_list_item' );
+
     add_filter( 'bns_bio_author_email_text', '__return_null', 100 );
     add_filter( 'bns_bio_author_email', '__return_null', 100 );
 

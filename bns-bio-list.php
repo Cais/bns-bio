@@ -64,10 +64,14 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
      * @internal NOTE: HTML5 automatically closes the `li` tag before starting
      * a new one ... make use of this here
      */
-    add_filter( 'bns_bio_author_name_text',     function() { return sprintf( '<li class="bns-bio-author-name-text">%1$s',  __( 'Written by: ', 'bns-bio' ) ); } );
-    add_filter( 'bns_bio_author_url_text',      function() { return sprintf( '<li class="bns-bio-author-url-text">%1$s',   __( 'From: ', 'bns-bio' ) ); } );
-    add_filter( 'bns_bio_author_email_text',    function() { return sprintf( '<li class="bns-bio-author-email-text">%1$s', __( 'Email: ', 'bns-bio' ) ); } );
-    add_filter( 'bns_bio_author_desc_text',     function() { return sprintf( '<li class="bns-bio-author-desc-text">%1$s',  __( 'About: ', 'bns-bio' ) ); } );
+    add_action( 'bns_bio_before_author_name', 'bns_bio_list_item' );
+    // add_filter( 'bns_bio_author_name_text',     function() { return sprintf( '<li class="bns-bio-author-name-text">%1$s',  __( 'Written by: ', 'bns-bio' ) ); } );
+    add_action( 'bns_bio_before_author_url', 'bns_bio_list_item' );
+    // add_filter( 'bns_bio_author_url_text',      function() { return sprintf( '<li class="bns-bio-author-url-text">%1$s',   __( 'From: ', 'bns-bio' ) ); } );
+    add_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
+    // add_filter( 'bns_bio_author_email_text',    function() { return sprintf( '<li class="bns-bio-author-email-text">%1$s', __( 'Email: ', 'bns-bio' ) ); } );
+    add_action( 'bns_bio_before_author_desc', 'bns_bio_list_item' );
+    // add_filter( 'bns_bio_author_desc_text',     function() { return sprintf( '<li class="bns-bio-author-desc-text">%1$s',  __( 'About: ', 'bns-bio' ) ); } );
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
