@@ -46,6 +46,31 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * http://www.gnu.org/licenses/gpl-2.0.html
  */
 
+/**
+ * Enqueue Plugin Scripts and Styles
+ * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
+ *
+ * @subpackage  BNS_Bio_List
+ * @since       0.1
+ *
+ * @uses        plugin_dir_path
+ * @uses        plugin_dir_url
+ * @uses        wp_enqueue_style
+ */
+function BNS_Bio_List_Scripts_and_Styles() {
+    /** Get the plugin data */
+    require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    $bns_bio_list_data = get_plugin_data( __FILE__ );
+
+    /** Enqueue Styles */
+    wp_enqueue_style( 'BNS-Bio-List-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-list-style.css', array(), $bns_bio_list_data['Version'], 'screen' );
+    /** Check if custom stylesheet is readable (exists) */
+    if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-list-custom-style.css' ) ) {
+        wp_enqueue_style( 'BNS-Bio-List-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-list-custom-style.css', array(), $bns_bio_list_data['Version'], 'screen' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'BNS_Bio_List_Scripts_and_Styles' );
+
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
@@ -65,13 +90,9 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
      * a new one ... make use of this here
      */
     add_action( 'bns_bio_before_author_name', 'bns_bio_list_item' );
-    // add_filter( 'bns_bio_author_name_text',     function() { return sprintf( '<li class="bns-bio-author-name-text">%1$s',  __( 'Written by: ', 'bns-bio' ) ); } );
     add_action( 'bns_bio_before_author_url', 'bns_bio_list_item' );
-    // add_filter( 'bns_bio_author_url_text',      function() { return sprintf( '<li class="bns-bio-author-url-text">%1$s',   __( 'From: ', 'bns-bio' ) ); } );
     add_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
-    // add_filter( 'bns_bio_author_email_text',    function() { return sprintf( '<li class="bns-bio-author-email-text">%1$s', __( 'Email: ', 'bns-bio' ) ); } );
     add_action( 'bns_bio_before_author_desc', 'bns_bio_list_item' );
-    // add_filter( 'bns_bio_author_desc_text',     function() { return sprintf( '<li class="bns-bio-author-desc-text">%1$s',  __( 'About: ', 'bns-bio' ) ); } );
 
 } else {
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
