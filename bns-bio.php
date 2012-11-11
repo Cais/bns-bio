@@ -42,6 +42,8 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * todo Find a better way to test if plugin is active; plugin folder/directory needs to be dynamically set
  */
 
 class BNS_Bio {

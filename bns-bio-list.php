@@ -79,6 +79,8 @@ if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
      * Set priority higher than default (read: action fires later than default)
      */
     add_action( 'bns_bio_before_all', function(){ echo '<ul class="bns-bio-list">'; }, 20 );
+    /** Set priority to fire earlier than 'BNS-Bio-Box' (at default 10) to insure output will validate */
+    add_action( 'bns_bio_after_all', function(){ echo '</ul><!-- .bns-bio-list -->'; }, 9 );
 
     function bns_bio_list_item(){
         echo '<li class="bns-bio-list-item">';
