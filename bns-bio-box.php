@@ -58,6 +58,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @uses        wp_enqueue_style
  */
 function BNS_Bio_Box_Scripts_and_Styles() {
+
     /** Get the plugin data */
     require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     $bns_bio_box_data = get_plugin_data( __FILE__ );
@@ -68,6 +69,7 @@ function BNS_Bio_Box_Scripts_and_Styles() {
     if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-box-custom-style.css' ) ) {
         wp_enqueue_style( 'BNS-Bio-Box-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-box-custom-style.css', array(), $bns_bio_box_data['Version'], 'screen' );
     }
+
 }
 add_action( 'wp_enqueue_scripts', 'BNS_Bio_Box_Scripts_and_Styles' );
 
@@ -77,18 +79,24 @@ function bns_bio_open_box() {
 }
 
 /** Close CSS wrapper container */
-function bns_bio_close_box(){
+function bns_bio_close_box() {
     echo '</div><!-- .bns-bio-box -->';
 }
 
+/** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
+$bns_bio_plugin_directory = basename( dirname ( __FILE__ ) );
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
+if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
+
     /** Add CSS container around layout */
     add_action( 'bns_bio_before_all', 'bns_bio_open_box' );
     add_action( 'bns_bio_after_all', 'bns_bio_close_box' );
+
 } else {
+
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
     $exit_message = __( 'BNS Bio Box requires the BNS Bio Plugin to be activated first.', 'bns-bio-box' );
     exit ( $exit_message );
+
 }

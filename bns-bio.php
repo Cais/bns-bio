@@ -42,18 +42,19 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
- *
- * todo Find a better way to test if plugin is active; plugin folder/directory needs to be dynamically set
  */
 
 class BNS_Bio {
+
     /** Constructor */
-    function __construct(){
+    function __construct() {
+
         /** Add Scripts and Styles */
         add_action( 'wp_enqueue_scripts', array( $this, 'Scripts_and_Styles' ) );
 
         /** Create Shortcode */
         add_shortcode( 'bns_bio', array( $this, 'author_block' ) );
+
     }
 
     /**
@@ -68,6 +69,7 @@ class BNS_Bio {
      * @uses    wp_enqueue_style
      */
     function Scripts_and_Styles() {
+
         /** Get the plugin data */
         require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
         $bns_bio_data = get_plugin_data( __FILE__ );
@@ -78,6 +80,7 @@ class BNS_Bio {
         if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-custom-style.css' ) ) {
             wp_enqueue_style( 'BNS-Bio-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-custom-style.css', array(), $bns_bio_data['Version'], 'screen' );
         }
+
     }
 
     /**
@@ -95,7 +98,8 @@ class BNS_Bio {
      * @uses    get_userdata
      *
      */
-    function author_block(  ){
+    function author_block() {
+
         /** @var $current_author - current author data an as object */
         $current_author = ( get_query_var( 'author_name ' ) ) ? get_user_by( 'id', get_query_var( 'author_name' ) ) : get_userdata( get_query_var( 'author' ) );
 
@@ -105,7 +109,7 @@ class BNS_Bio {
         $author_email   = get_the_author_meta( 'user_email', $current_author );
         $author_bio     = get_the_author_meta( 'user_description', $current_author );
 
-        /** Start output buffer */
+        /** Start output */
         $output = '<div class="bns-bio">';
 
         ob_start();
@@ -145,9 +149,11 @@ class BNS_Bio {
         do_action( 'bns_bio_after_all' );
         $output .= ob_get_clean();
 
+        /** End output */
         $output .= '</div><!-- .bns-bio -->';
 
         return $output;
+
     }
 }
 $bns_bio = new BNS_Bio();

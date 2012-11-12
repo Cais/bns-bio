@@ -57,6 +57,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @uses        wp_enqueue_style
  */
 function BNS_Bio_Hide_Scripts_and_Styles() {
+
     /** Get the plugin data */
     require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     $bns_bio_hide_data = get_plugin_data( __FILE__ );
@@ -67,23 +68,30 @@ function BNS_Bio_Hide_Scripts_and_Styles() {
     if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-hide-custom-style.css' ) ) {
         wp_enqueue_style( 'BNS-Bio-Hide-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-hide-custom-style.css', array(), $bns_bio_hide_data['Version'], 'screen' );
     }
+
 }
 add_action( 'wp_enqueue_scripts', 'BNS_Bio_Hide_Scripts_and_Styles' );
 
+/** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
+$bns_bio_plugin_directory = basename( dirname ( __FILE__ ) );
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if ( is_plugin_active( 'bns-bio/bns-bio.php' ) ) {
+if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
-    function bns_bio_remove_list_item(){
+    /** Remove the list item (if it exists) */
+    function bns_bio_remove_list_item() {
         remove_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
     }
     add_action( 'init', 'bns_bio_remove_list_item' );
 
+    /** Return null strings to the filters clearing existing content */
     add_filter( 'bns_bio_author_email_text', '__return_null', 100 );
     add_filter( 'bns_bio_author_email', '__return_null', 100 );
 
 } else {
+
     /** @var $exit_message string - Message to display if 'BNS Bio' is not activated */
     $exit_message = __( 'BNS Bio Hide requires the BNS Bio Plugin to be activated first.', 'bns-bio-hide' );
     exit ( $exit_message );
+
 }

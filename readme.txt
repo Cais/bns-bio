@@ -45,6 +45,7 @@ The shortcode is simply `bns_bio` wrapped in the standard square brackets.
   The license for this software can also likely be found here:
   http://www.gnu.org/licenses/gpl-2.0.html
 
+* This plugin was written for use in an ongoing series of presentations at the WordPress GTA Meetup group; and, although fully functional, it is currently considered 'alpha-ware'.
 
 == Upgrade Notice ==
 Please stay current with your WordPress installation, your active theme, and your plugins.
