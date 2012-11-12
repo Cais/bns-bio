@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 An author details shortcode plugin with extensions that modify output
 
 == Description ==
-An author details shortcode plugin with extensions that modify output. The extensions can add a rounded corner box; display as an unordered list; and/or hide the author email address. Additionally you will find many hooks to tinker with as well.
+An author details shortcode plugin with multiple extensions that can modify the output. The extension plugins, using some of the many available hooks, can add a rounded corner border; display the details as an unordered list; and/or hide the author email address details.
 
 == Installation ==
 Read this article for further assistance: http://wpfirstaid.com/2009/12/plugin-installation/

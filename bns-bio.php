@@ -13,7 +13,10 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 /**
  * BNS Bio
- * An author details shortcode plugin with extensions to modify output
+ * An author details shortcode plugin with multiple extensions that can modify
+ * the output. The extension plugins, using some of the many available hooks,
+ * can add a rounded corner border; display the details as an unordered list;
+ * and/or hide the author email address details.
  *
  * @package     BNS_Bio
  * @link        http://buynowshop.com/plugins/bns-bio/
