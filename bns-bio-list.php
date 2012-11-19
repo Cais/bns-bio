@@ -117,7 +117,7 @@ if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
 } else {
 
-    /** If 'BNS Bio' is not active then self-deactivate */
+    /** If 'BNS Bio' is not active then self-deactivate 'BNS Bio List' */
     deactivate_plugins( $bns_bio_plugin_directory . '/bns-bio-list.php' );
 
 }

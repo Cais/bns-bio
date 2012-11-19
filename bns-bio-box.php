@@ -88,7 +88,7 @@ function bns_bio_close_box() {
 }
 
 /** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
-$bns_bio_plugin_directory = basename( dirname ( __FILE__ ) );
+$bns_bio_plugin_directory = basename( dirname( __FILE__ ) );
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
@@ -99,7 +99,7 @@ if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
 } else {
 
-    /** If 'BNS Bio' is not active then self-deactivate */
+    /** If 'BNS Bio' is not active then self-deactivate 'BNS Bio Box' */
     deactivate_plugins( $bns_bio_plugin_directory . '/bns-bio-box.php' );
 
 }
