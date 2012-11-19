@@ -53,6 +53,7 @@ Please stay current with your WordPress installation, your active theme, and you
 == Changelog ==
 = 0.2 =
 * Refactor PHP closures into complete functions
+* Remove `BNS Bio` active checks until a more crash proof method can be found
 
 = 0.1 =
 * Initial Release - November 2012
