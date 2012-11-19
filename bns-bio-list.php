@@ -48,7 +48,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 0.2
  * @date    November 19, 2012
  * Change PHP closures to full functions
- * Remove `BNS Bio` active check until a more crash proof method can be found
+ * Change sanity check to self-deactivate if 'BNS Bio' is not active
  */
 
 /**
@@ -78,33 +78,46 @@ function BNS_Bio_List_Scripts_and_Styles() {
 }
 add_action( 'wp_enqueue_scripts', 'BNS_Bio_List_Scripts_and_Styles' );
 
-/**
- * Add additional actions to change the layout
- * Set priority higher than default (read: action fires later than default)
- */
-add_action( 'bns_bio_before_all', 'bns_bio_open_list', 20 );
-function bns_bio_open_list() {
-    echo '<ul class="bns-bio-list">';
-}
+/** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
+$bns_bio_plugin_directory = basename( dirname ( __FILE__ ) );
+/** Sanity check - is the plugin active? */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
-/** Set priority to fire earlier than 'BNS-Bio-Box' (at default 10) to insure output will validate */
-add_action( 'bns_bio_after_all', 'bns_bio_close_list', 9 );
-function bns_bio_close_list() {
-    echo '</ul><!-- .bns-bio-list -->';
-}
+    /**
+     * Add additional actions to change the layout
+     * Set priority higher than default (read: action fires later than default)
+     */
+    add_action( 'bns_bio_before_all', 'bns_bio_open_list', 20 );
+    function bns_bio_open_list() {
+        echo '<ul class="bns-bio-list">';
+    }
 
-/** Open an `li` tag */
-function bns_bio_list_item() {
-    echo '<li class="bns-bio-list-item">';
-}
+    /** Set priority to fire earlier than 'BNS-Bio-Box' (at default 10) to insure output will validate */
+    add_action( 'bns_bio_after_all', 'bns_bio_close_list', 9 );
+    function bns_bio_close_list() {
+        echo '</ul><!-- .bns-bio-list -->';
+    }
 
-/**
- * Change author details to use `li` tag rather than `span`
- * @internal NOTE: HTML5 automatically closes the `li` tag before starting
- * a new one ... make use of this here
- * @todo Review this at a later date
- */
-add_action( 'bns_bio_before_author_name', 'bns_bio_list_item' );
-add_action( 'bns_bio_before_author_url', 'bns_bio_list_item' );
-add_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
-add_action( 'bns_bio_before_author_desc', 'bns_bio_list_item' );
+    /** Open an `li` tag */
+    function bns_bio_list_item() {
+        echo '<li class="bns-bio-list-item">';
+    }
+
+    /**
+     * Change author details to use `li` tag rather than `span`
+     * @internal NOTE: HTML5 automatically closes the `li` tag before starting
+     * a new one ... make use of this here
+     * @todo Review this at a later date
+     */
+    add_action( 'bns_bio_before_author_name', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_url', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_email', 'bns_bio_list_item' );
+    add_action( 'bns_bio_before_author_desc', 'bns_bio_list_item' );
+
+} else {
+
+    /** If 'BNS Bio' is not active then self-deactivate */
+    deactivate_plugins( $bns_bio_plugin_directory . '/bns-bio-list.php' );
+
+}

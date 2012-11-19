@@ -47,7 +47,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @version 0.2
  * @date    November 19, 2012
- * Remove `BNS Bio` active check until a more crash proof method can be found
+ * Change sanity check to self-deactivate if 'BNS Bio' is not active
  */
 
 /**
@@ -87,6 +87,19 @@ function bns_bio_close_box() {
     echo '</div><!-- .bns-bio-box -->';
 }
 
-/** Add CSS container around layout */
-add_action( 'bns_bio_before_all', 'bns_bio_open_box' );
-add_action( 'bns_bio_after_all', 'bns_bio_close_box' );
+/** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
+$bns_bio_plugin_directory = basename( dirname ( __FILE__ ) );
+/** Sanity check - is the plugin active? */
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
+
+    /** Add CSS container around layout */
+    add_action( 'bns_bio_before_all', 'bns_bio_open_box' );
+    add_action( 'bns_bio_after_all', 'bns_bio_close_box' );
+
+} else {
+
+    /** If 'BNS Bio' is not active then self-deactivate */
+    deactivate_plugins( $bns_bio_plugin_directory . '/bns-bio-box.php' );
+
+}
