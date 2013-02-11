@@ -132,65 +132,278 @@ class BNS_Bio {
 
 
     /**
+     * Wrapper Open
+     * Adds the opening hook
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function wrapper_open() {
+
+        ob_start();
+
+        do_action( 'bns_bio_before_all' );
+
+        return ob_get_clean();
+
+    } /** End function - wrapper open */
+
+
+    /**
+     * Wrapper Close
+     * Adds the closing hook
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function wrapper_close() {
+
+        ob_start();
+
+        do_action( 'bns_bio_after_all' );
+
+        return ob_get_clean();
+
+    } /** End function - wrapper close */
+
+
+    /**
+     * Get Author Name
+     * Returns the author details name value
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::author_details
+     * @uses    apply_filters
+     *
+     * @return  string
+     */
+    function get_author_name() {
+
+        return apply_filters( 'bns_bio_author_name_text', sprintf( '<span class="bns-bio-author-name-text">%1$s</span>', __( 'Written by: ', 'bns-bio' ) ) )
+            . apply_filters( 'bns_bio_author_name', sprintf( '<span class="bns-bio-author-name">%1$s</span>', $this->author_details( 'name' ) . '<br />' ) );
+
+    } /** End function - get author name */
+
+
+    /**
+     * Author Name
+     * Wraps the author name value in action hooks and returns everything as a
+     * string for use in the shortcode output
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::get_author_name
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function author_name() {
+
+        ob_start();
+
+        do_action( 'bns_bio_before_author_name' );
+
+        echo $this->get_author_name();
+
+        do_action( 'bns_bio_after_author_name' );
+
+        return ob_get_clean();
+
+    } /** End function - author name */
+
+
+    /**
+     * Get Author URL
+     * Returns the author details url value
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::author_details
+     * @uses    apply_filters
+     *
+     * @return  string
+     */
+    function get_author_url() {
+
+        $author_url = $this->author_details( 'url' );
+        if ( ! empty( $author_url ) ) {
+            return apply_filters( 'bns_bio_author_url_text', sprintf( '<span class="bns-bio-author-url-text">%1$s</span>', __( 'From: ', 'bns-bio' ) ) )
+                . apply_filters( 'bns_bio_author_url', sprintf( '<span class="bns-bio-author-url">%1$s</span>', $this->author_details( 'url' ) . '<br />' ) );
+        } else {
+            return null;
+        } /** End if - not empty */
+
+    } /** End function - get author url */
+
+
+    /**
+     * Author URL
+     * Wraps the author url value in action hooks and returns everything as a
+     * string for use in the shortcode output
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::get_author_url
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function author_url() {
+
+        ob_start();
+
+        do_action( 'bns_bio_before_author_url' );
+
+        echo $this->get_author_url();
+
+        do_action( 'bns_bio_after_author_url' );
+
+        return ob_get_clean();
+
+    } /** End function - author url */
+
+
+    /**
+     * Get Author Email
+     * Returns the author details email value
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::author_details
+     * @uses    apply_filters
+     *
+     * @return  string
+     */
+    function get_author_email() {
+
+        return apply_filters( 'bns_bio_author_email_text', sprintf( '<span class="bns-bio-author-email-text">%1$s</span>', __( 'Email: ', 'bns-bio' ) ) )
+            . apply_filters( 'bns_bio_author_email', sprintf( '<span class="bns-bio-author-email">%1$s</span>', $this->author_details( 'email' ) . '<br />' ) );
+
+    } /** End function - get author email */
+
+
+    /**
+     * Author Email
+     * Wraps the author email value in action hooks and returns everything as a
+     * string for use in the shortcode output
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::get_author_email
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function author_email() {
+
+        ob_start();
+
+        do_action( 'bns_bio_before_author_email' );
+
+        echo $this->get_author_email();
+
+        do_action( 'bns_bio_after_author_email' );
+
+        return ob_get_clean();
+
+    } /** End function - author email */
+
+
+    /**
+     * Get Author Bio
+     * Returns the author details description value
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::author_details
+     * @uses    apply_filters
+     *
+     * @return  string
+     */
+    function get_author_bio() {
+
+        $author_bio = $this->author_details( 'about' );
+        if ( ! empty( $author_bio ) ) {
+            return apply_filters( 'bns_bio_author_desc_text', sprintf( '<span class="bns-bio-author-desc-text">%1$s</span>', __( 'About: ', 'bns-bio' ) ) )
+                . apply_filters( 'bns_bio_author_desc', sprintf( '<span class="bns-bio-author-desc">%1$s</span>', $this->author_details( 'about' ) ) );
+        } else {
+            return null;
+        } /** End if - not empty */
+
+    } /** End function - get author bio */
+
+
+    /**
+     * Author Bio
+     * Wraps the author description value in action hooks and returns everything
+     * as a string for use in the shortcode output
+     *
+     * @package BNS_Bio
+     * @since   0.3
+     *
+     * @uses    BNS_Bio::get_author_desc
+     * @uses    do_action
+     *
+     * @return  string
+     */
+    function author_bio() {
+
+        ob_start();
+
+        do_action( 'bns_bio_before_author_desc' );
+
+        echo $this->get_author_bio();
+
+        do_action( 'bns_bio_after_author_desc' );
+
+        return ob_get_clean();
+
+    }
+
+
+    /**
      * Author Block
      * Gets the author details and builds the basic structures of the output
      *
      * @package BNS_Bio
      * @since   0.1
      *
-     * @uses    BNS_Bio::author_details
-     * @uses    apply_filters
-     * @uses    do_action
+     * @uses    BNS_Bio::author_bio
+     * @uses    BNS_Bio::author_email
+     * @uses    BNS_Bio::author_name
+     * @uses    BNS_Bio::author_url
+     * @uses    BNS_Bio::wrapper_close
+     * @uses    BNS_Bio::wrapper_open
      *
      * @version 0.3
      * @date    February 11, 2013
-     * Refactored to use `author_details` method
+     * Refactored to use individual `author_*` methods
      */
     function author_block() {
 
-        /** Start output */
         $output = '<div class="bns-bio">';
-
-        ob_start();
-        do_action( 'bns_bio_before_all' );
-        $output .= ob_get_clean();
-
-        ob_start();
-        do_action( 'bns_bio_before_author_name' );
-        $output .= ob_get_clean();
-        $output .= apply_filters( 'bns_bio_author_name_text', sprintf( '<span class="bns-bio-author-name-text">%1$s</span>', __( 'Written by: ', 'bns-bio' ) ) )
-                . apply_filters( 'bns_bio_author_name', sprintf( '<span class="bns-bio-author-name">%1$s</span>', $this->author_details( 'name' ) . '<br />' ) );
-        do_action( 'bns_bio_after_author_name' );
-
-        $author_url = $this->author_details( 'url' );
-        if ( ! empty( $author_url ) ) {
-            ob_start();
-            do_action( 'bns_bio_before_author_url' );
-            $output .= ob_get_clean();
-            $output .= apply_filters( 'bns_bio_author_url_text', sprintf( '<span class="bns-bio-author-url-text">%1$s</span>', __( 'From: ', 'bns-bio' ) ) )
-                    . apply_filters( 'bns_bio_author_url', sprintf( '<span class="bns-bio-author-url">%1$s</span>', $this->author_details( 'url' ) . '<br />' ) );
-        } /** End if - not empty */
-
-        ob_start();
-        do_action( 'bns_bio_before_author_email' );
-        $output .= ob_get_clean();
-        $output .= apply_filters( 'bns_bio_author_email_text', sprintf( '<span class="bns-bio-author-email-text">%1$s</span>', __( 'Email: ', 'bns-bio' ) ) )
-                . apply_filters( 'bns_bio_author_email', sprintf( '<span class="bns-bio-author-email">%1$s</span>', $this->author_details( 'email' ) . '<br />' ) );
-
-        $author_bio = $this->author_details( 'about' );
-        if ( ! empty( $author_bio ) ) {
-            ob_start();
-            do_action( 'bns_bio_before_author_desc' );
-            $output .= ob_get_clean();
-            $output .= apply_filters( 'bns_bio_author_desc_text', sprintf( '<span class="bns-bio-author-desc-text">%1$s</span>', __( 'About: ', 'bns-bio' ) ) )
-                    . apply_filters( 'bns_bio_author_desc', sprintf( '<span class="bns-bio-author-desc">%1$s</span>', $this->author_details( 'about' ) ) );
-        } /** End if - not empty */
-
-        ob_start();
-        do_action( 'bns_bio_after_all' );
-        $output .= ob_get_clean();
-
-        /** End output */
+            $output .= $this->wrapper_open();
+            $output .= $this->author_name();
+            $output .= $this->author_url();
+            $output .= $this->author_email();
+            $output .= $this->author_bio();
+            $output .= $this->wrapper_close();
         $output .= '</div><!-- .bns-bio -->';
 
         return $output;
