@@ -51,6 +51,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Refactoring without functionality changes
  * Documentation updates
  * Added code block termination comments
+ * Added a 10px bottom margin to the general output
  */
 
 class BNS_Bio {
