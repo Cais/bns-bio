@@ -22,7 +22,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-bio/
  * @link        https://github.com/Cais/bns-bio/
  * @link        http://wordpress.org/extend/plugins/bns-bio/
- * @version     0.3
+ * @version     0.3.1
  * @author      Edward Caissie <edward.caissie@gmail.com>
  * @copyright   Copyright (c) 2012-2013, Edward Caissie
  *
