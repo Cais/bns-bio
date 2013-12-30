@@ -22,10 +22,10 @@
 */
 
 div.bns-bio-box {
-    border: 1px solid #000000;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    list-style-position: inside;
-    padding: 10px;
+	border: 1px solid #000000;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	list-style-position: inside;
+	padding: 10px;
 }
