@@ -23,7 +23,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://wordpress.org/extend/plugins/bns-bio/
  * @version     0.3
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2012-2013, Edward Caissie
+ * @copyright   Copyright (c) 2012-2015, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -85,8 +85,10 @@ add_action( 'wp_enqueue_scripts', 'BNS_Bio_List_Scripts_and_Styles' );
 
 /** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
 $bns_bio_plugin_directory = basename( dirname( __FILE__ ) );
+
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
 	/**

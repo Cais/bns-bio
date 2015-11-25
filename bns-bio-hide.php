@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
 /**
- * BNS Bio List
+ * BNS Bio Hide
  * An extension plugin included with BNS Bio to hide the email address.
  *
  * @package     BNS_Bio
@@ -20,9 +20,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-bio/
  * @link        https://github.com/Cais/bns-bio/
  * @link        http://wordpress.org/extend/plugins/bns-bio/
- * @version     0.2
+ * @version     0.3.1
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2012-2013, Edward Caissie
+ * @copyright   Copyright (c) 2012-2015, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -51,6 +51,10 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version     0.3
  * @date        February 11, 2013
  * Version matching to BNS-Bio
+ *
+ * @version 0.3.1
+ * @date    November 25, 2015
+ * Minor inline documentation updates
  */
 
 /**
@@ -83,8 +87,10 @@ add_action( 'wp_enqueue_scripts', 'BNS_Bio_Hide_Scripts_and_Styles' );
 
 /** @var $bns_bio_plugin_directory - define plugin directory name dynamically */
 $bns_bio_plugin_directory = basename( dirname( __FILE__ ) );
+
 /** Sanity check - is the plugin active? */
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
 if ( is_plugin_active( $bns_bio_plugin_directory . '/bns-bio.php' ) ) {
 
 	/** Remove the list item (if it exists) */

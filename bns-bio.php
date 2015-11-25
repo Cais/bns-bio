@@ -24,7 +24,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://wordpress.org/extend/plugins/bns-bio/
  * @version     0.3.1
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2012-2013, Edward Caissie
+ * @copyright   Copyright (c) 2012-2015, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -57,21 +57,21 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @date        May 6, 2013
  * Version number compatibility updates
  */
-
 class BNS_Bio {
 
 	/** Constructor */
 	function __construct() {
 
 		/** Add Scripts and Styles */
-		add_action( 'wp_enqueue_scripts', array( $this, 'scripts_and_styles' ) );
+		add_action( 'wp_enqueue_scripts', array(
+			$this,
+			'scripts_and_styles'
+		) );
 
 		/** Create Shortcode */
 		add_shortcode( 'bns_bio', array( $this, 'author_block' ) );
 
 	}
-
-	/** End function - construct */
 
 
 	/**
@@ -97,11 +97,8 @@ class BNS_Bio {
 		if ( is_readable( plugin_dir_path( __FILE__ ) . 'bns-bio-custom-style.css' ) ) {
 			wp_enqueue_style( 'BNS-Bio-Custom-Style', plugin_dir_url( __FILE__ ) . 'bns-bio-custom-style.css', array(), $bns_bio_data['Version'], 'screen' );
 		}
-		/** End if - is readable */
 
 	}
-
-	/** End function - scripts and styles */
 
 
 	/**
@@ -122,8 +119,12 @@ class BNS_Bio {
 	 * @return  null|string - details as per value passed
 	 */
 	function author_details( $value ) {
-		/** @var $current_author - author object */
-		$current_author = ( get_query_var( 'author_name ' ) ) ? get_user_by( 'id', get_query_var( 'author_name' ) ) : get_userdata( get_query_var( 'author' ) );
+
+		if ( ( get_query_var( 'author_name ' ) ) ) {
+			$current_author = get_user_by( 'id', get_query_var( 'author_name' ) );
+		} else {
+			$current_author = get_userdata( get_query_var( 'author' ) );
+		}
 
 		/** Get the various details to be displayed */
 		if ( 'name' == $value ) {
@@ -137,11 +138,8 @@ class BNS_Bio {
 		} else {
 			return null;
 		}
-		/** End if - value */
 
 	}
-
-	/** End function - author details */
 
 
 	/**
@@ -165,8 +163,6 @@ class BNS_Bio {
 
 	}
 
-	/** End function - wrapper open */
-
 
 	/**
 	 * Wrapper Close
@@ -189,8 +185,6 @@ class BNS_Bio {
 
 	}
 
-	/** End function - wrapper close */
-
 
 	/**
 	 * Get Author Name
@@ -207,11 +201,9 @@ class BNS_Bio {
 	function get_author_name() {
 
 		return apply_filters( 'bns_bio_author_name_text', sprintf( '<span class="bns-bio-author-name-text">%1$s</span>', __( 'Written by: ', 'bns-bio' ) ) )
-		. apply_filters( 'bns_bio_author_name', sprintf( '<span class="bns-bio-author-name">%1$s</span>', $this->author_details( 'name' ) . '<br />' ) );
+		       . apply_filters( 'bns_bio_author_name', sprintf( '<span class="bns-bio-author-name">%1$s</span>', $this->author_details( 'name' ) . '<br />' ) );
 
 	}
-
-	/** End function - get author name */
 
 
 	/**
@@ -241,8 +233,6 @@ class BNS_Bio {
 
 	}
 
-	/** End function - author name */
-
 
 	/**
 	 * Get Author URL
@@ -261,15 +251,12 @@ class BNS_Bio {
 		$author_url = $this->author_details( 'url' );
 		if ( ! empty( $author_url ) ) {
 			return apply_filters( 'bns_bio_author_url_text', sprintf( '<span class="bns-bio-author-url-text">%1$s</span>', __( 'From: ', 'bns-bio' ) ) )
-			. apply_filters( 'bns_bio_author_url', sprintf( '<span class="bns-bio-author-url">%1$s</span>', $this->author_details( 'url' ) . '<br />' ) );
+			       . apply_filters( 'bns_bio_author_url', sprintf( '<span class="bns-bio-author-url">%1$s</span>', $this->author_details( 'url' ) . '<br />' ) );
 		} else {
 			return null;
 		}
-		/** End if - not empty */
 
 	}
-
-	/** End function - get author url */
 
 
 	/**
@@ -299,8 +286,6 @@ class BNS_Bio {
 
 	}
 
-	/** End function - author url */
-
 
 	/**
 	 * Get Author Email
@@ -317,11 +302,9 @@ class BNS_Bio {
 	function get_author_email() {
 
 		return apply_filters( 'bns_bio_author_email_text', sprintf( '<span class="bns-bio-author-email-text">%1$s</span>', __( 'Email: ', 'bns-bio' ) ) )
-		. apply_filters( 'bns_bio_author_email', sprintf( '<span class="bns-bio-author-email">%1$s</span>', $this->author_details( 'email' ) . '<br />' ) );
+		       . apply_filters( 'bns_bio_author_email', sprintf( '<span class="bns-bio-author-email">%1$s</span>', $this->author_details( 'email' ) . '<br />' ) );
 
 	}
-
-	/** End function - get author email */
 
 
 	/**
@@ -351,8 +334,6 @@ class BNS_Bio {
 
 	}
 
-	/** End function - author email */
-
 
 	/**
 	 * Get Author Bio
@@ -371,15 +352,12 @@ class BNS_Bio {
 		$author_bio = $this->author_details( 'about' );
 		if ( ! empty( $author_bio ) ) {
 			return apply_filters( 'bns_bio_author_desc_text', sprintf( '<span class="bns-bio-author-desc-text">%1$s</span>', __( 'About: ', 'bns-bio' ) ) )
-			. apply_filters( 'bns_bio_author_desc', sprintf( '<span class="bns-bio-author-desc">%1$s</span>', $this->author_details( 'about' ) ) );
+			       . apply_filters( 'bns_bio_author_desc', sprintf( '<span class="bns-bio-author-desc">%1$s</span>', $this->author_details( 'about' ) ) );
 		} else {
 			return null;
 		}
-		/** End if - not empty */
 
 	}
-
-	/** End function - get author bio */
 
 
 	/**
@@ -442,12 +420,9 @@ class BNS_Bio {
 		return $output;
 
 	}
-	/** End function - author block */
 
 
 }
-
-/** End class - BNS Bio */
 
 /** @var $bns_bio - new instance of class */
 $bns_bio = new BNS_Bio();
